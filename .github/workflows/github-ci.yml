@@ -1,0 +1,25 @@
+name: Testes Automatizados do Robot Framework
+on:
+  push:
+    branches:
+      - main
+
+  jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v2
+
+    - name: Configurar ambiente
+      run: |
+        sudo apt-get update
+        sudo apt-get install python3-pip -y
+        pip3 install --upgrade robotframework
+        pip3 install --upgrade robotframework-seleniumlibrary
+        # Instale outras dependências, se necessário
+
+    - name: Executar Testes
+      run: |
+        robot -d ./results -v BROWSER:headlesschrome .tests/TestSitePractice.robot
