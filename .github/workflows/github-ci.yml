@@ -35,7 +35,7 @@ jobs:
           /home/runner/work/TestePractice/TestePractice/results/report.html
 
 # Job Docker - execução dos testes em container Docker
-WEB Testing in Chrome and Docker:
+#WEB Testing in Chrome and Docker:
     stage: Acceptance Tests
     image: dockerimage
     tags:
