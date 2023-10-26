@@ -23,3 +23,13 @@ jobs:
     - name: Executar Testes
       run: |
         robot -d ./results tests/TestSitePractice.robot 
+
+    - name: Upload de logs e relatórios
+      if: success()  # Esta etapa é executada apenas se os testes forem bem-sucedidos
+      uses: actions/upload-artifact@v2
+      with:
+        name: logs-and-reports
+        path: |
+          /home/runner/work/TestePractice/TestePractice/results/output.xml
+          /home/runner/work/TestePractice/TestePractice/results/log.html
+          /home/runner/work/TestePractice/TestePractice/results/report.html
