@@ -33,3 +33,27 @@ jobs:
           /home/runner/work/TestePractice/TestePractice/results/output.xml
           /home/runner/work/TestePractice/TestePractice/results/log.html
           /home/runner/work/TestePractice/TestePractice/results/report.html
+
+# Job Docker - execução dos testes em container Docker
+WEB Testing in Chrome and Docker:
+    stage: Acceptance Tests
+    image: dockerimage
+    tags:
+        - docker
+    artifacts:
+        when: always
+        paths:
+            - ./results
+        expire_in: 1 week
+    script:
+        - robot -d ./results tests/TestSitePractice.robot 
+
+    - name: Upload de logs e relatórios
+      if: success()  # Esta etapa é executada apenas se os testes forem bem-sucedidos
+      uses: actions/upload-artifact@v2
+      with:
+        name: logs-and-reports
+        path: |
+          /home/runner/work/TestePractice/TestePractice/results/output.xml
+          /home/runner/work/TestePractice/TestePractice/results/log.html
+          /home/runner/work/TestePractice/TestePractice/results/report.html
